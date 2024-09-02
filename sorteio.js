@@ -92,7 +92,7 @@ function gereVisualDeListaDeEspera(lista, ultimaPosicao) {
 
   for (var i = ultimaPosicao; i < lista.length; i++) {
 
-    conteudo += "<font size='5'><table width=40% ><tr> <td  width=20%  align=right>" + padSpaces(lista[i], lista.length) + "(" + (parseInt(i) + 1) + "º) número </td><td width=20% align=right> <b>&emsp;&emsp;&emsp; " + lista[i] + "</td></tr></table></font></b>";
+    conteudo += "<table width=40% ><tr> <td  width=20%  align=right>" + padSpaces(lista[i], lista.length) + "(" + (parseInt(i) + 1) + "º) número </td><td width=20% align=right>&emsp;&emsp;&emsp; " + lista[i] + "</td></tr></table>";
 
 
   }
