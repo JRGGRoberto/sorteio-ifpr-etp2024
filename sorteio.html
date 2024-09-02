@@ -1,0 +1,84 @@
+<!--INSTITUTO FEDERAL DO PARANÁ - DIRETORIA DE EDUCAÇÃO A DISTÂNCIA-->
+<!--Adaptado do INSTITUTO FEDERAL DE SANTA CATARINA - DEPARTAMENTO DE INGRESSO-->
+<!--Autores: Antonielly Garcia Rodrigues, Alex Helder Cordeiro de Oliveira-->
+<!--Alterado por: Rodrigo Moroni-->
+<!--09/2024-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sorteio Eletrônico - IFPR - EAD </title>
+    <link rel="icon" type="image/png" href="if-simbolo-150x150.png">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.js"></script>
+    <script src=seedrandom.js></script>
+    <script src=sorteio.js></script>
+</head>
+
+<body>
+    <br>
+    <div class="row justify-content-center">
+        <div class="col-md-1">
+            <img src="logo.png" />
+        </div>
+    </div>
+    <br>
+
+    <form name="sorteio">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <label for="nomeCurso" class="form-label">Curso</label>
+                <select id="nomeCurso" class="form-select">
+                    <option value="Especialização em Docência  na Educação Profissional e Tecnológica">Especialização em
+                        Docência na Educação Profissional e Tecnológica</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-md-2">
+                <label for="nomePolo" class="form-label">Polo</label>
+                <select id="nomePolo" class="form-select">
+                    <option value="Curitiba">Curitiba</option>
+                </select>
+            </div>
+
+
+            <div class="col-md-3">
+                <label for="cota" class="form-label">Cota</label>
+                <select id="cota" class="form-select">
+                    <option value="Ampla Concorrência">Ampla Concorrência</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-md-2">
+                <label for="totalInscritos" class="form-label">Total de Inscritos</label>
+                <input type="number" class="form-control" name="totalInscritos" maxlength=5>
+            </div>
+            <div class="col-md-2">
+                <label for="vagas" class="form-label">Vagas</label>
+                <input type="number" class="form-control" name="vagas" maxlength=5>
+            </div>
+            <div class="col-md-1">
+                <label for="semente" class="form-label">Semente</label>
+                <input type="number" class="form-control" name="semente" maxlength=9>
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <button type="button" class="btn btn-success" onclick="geraListaSorteada()">Gerar Lista</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div id="resultado" class="container">
+    </div>
+
+</body>
+
+</html>
