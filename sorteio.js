@@ -9,10 +9,11 @@ function geraListaSorteada() {
   } else {
     semente = new Date().getTime();
   }
-  let vagas = document.sorteio.vagas.value;
+  // let vagas = document.sorteio.vagas.value;
   let embaralhada = gereListaEmbaralhada(inscritos, semente);
-  let divImpressao = document.getElementById('resultado');
-  imprimeResultado(nomeCurso, semente, embaralhada, vagas, nomePolo, cota, divImpressao);
+  
+  imprimeResultado(nomeCurso, semente, embaralhada, nomePolo, cota);
+  baixaListaCSV(embaralhada, nomeCurso, nomePolo, cota);
 }
 
 function gereListaEmbaralhada(inscritos, semente) {
@@ -36,19 +37,19 @@ function gereListaEmbaralhada(inscritos, semente) {
   return resultado;
 }
 
-function imprimeResultado(nomeCurso, semente, embaralhada, vagas, nomePolo, cota, divImpressao) {
+function imprimeResultado(nomeCurso, semente, embaralhada, nomePolo, cota) {
+  let divImpressao = document.getElementById('resultado');
   let conteudo = `
   <div class="col">
     <div class="row justify-content-center">
       ${geraCabecalhoDaLista(nomeCurso, nomePolo, cota)}
-      <div class="col col-lg-4">
-      <table class="table table-striped table-sm">
+      <div class="col-md-6">
+      <table class="table table-striped table-sm" style="margin-left: 1rem;">
+        <caption style="caption-side: top; text-align: center;">Classificados do Sorteio na Ação Afirmativa: ${cota} </br> ${nomePolo} - ${nomeCurso}</caption>
         <tr><td>Posição</td><td>Número de Inscrição</td></tr>
-        ${gereVisualDeListaDeSelecionados(embaralhada, vagas)}
+        ${gereVisualDeListaDeSelecionados(embaralhada)}
       </table>
       </div>
-      ${gereVisualDeCabecalhoDaEspera(nomeCurso)}
-      ${gereVisualDeListaDeEspera(embaralhada, vagas)}
       ${gereVisualDeFim()}
       ${geraVisualDeInformacoes(semente)}
     </div>
@@ -68,40 +69,36 @@ function geraCabecalhoDaLista(nomeCurso, nomePolo, cota) {
       <div class="text-center text-sm">MINISTÉRIO DA EDUCAÇÃO</div>
       <div class="text-center text-sm">Instituto Federal do Paraná</div>
       <div class="text-center text-sm">Diretoria de Educação a Distância</div>
-      <div class="text-center">Classificados do Sorteio para Ação Afirmativa: ${cota}</div>
-      <div class="text-center">${nomePolo} - ${nomeCurso}</div>
     `;
 }
 
-function gereVisualDeListaDeSelecionados(lista, ultimaPosicao) {
+function gereVisualDeListaDeSelecionados(lista) {
   let conteudo = "";
-  for (let i = 0; i < ultimaPosicao; i++) {
+  for (let i = 0; i < lista.length; i++) {
     conteudo += "<tr><td>" + padSpaces(lista[i], lista.length) + (i + 1) + "º</td><td>&emsp;&emsp;&emsp; " + lista[i] + "</td></tr>";
-
-
   }
   return conteudo;
 }
 
-function gereVisualDeCabecalhoDaEspera(nomeCurso) {
-  return " <H2>&emsp;&emsp;&emsp;&emsp;&emsp;  Candidatos em Lista de Espera " + "</H2>";
-}
+// function gereVisualDeCabecalhoDaEspera(nomeCurso) {
+//   return " <H2>&emsp;&emsp;&emsp;&emsp;&emsp;  Candidatos em Lista de Espera " + "</H2>";
+// }
 
-function gereVisualDeListaDeEspera(lista, ultimaPosicao) {
-  var conteudo = "";
+// function gereVisualDeListaDeEspera(lista, ultimaPosicao) {
+//   var conteudo = "";
 
-  for (var i = ultimaPosicao; i < lista.length; i++) {
+//   for (var i = ultimaPosicao; i < lista.length; i++) {
 
-    conteudo += "<table width=40% ><tr> <td  width=20%  align=right>" + padSpaces(lista[i], lista.length) + "(" + (parseInt(i) + 1) + "º) número </td><td width=20% align=right>&emsp;&emsp;&emsp; " + lista[i] + "</td></tr></table>";
+//     conteudo += "<table width=40% ><tr> <td  width=20%  align=right>" + padSpaces(lista[i], lista.length) + "(" + (parseInt(i) + 1) + "º) número </td><td width=20% align=right>&emsp;&emsp;&emsp; " + lista[i] + "</td></tr></table>";
 
 
-  }
+//   }
 
-  return conteudo;
-}
+//   return conteudo;
+// }
 
 function gereVisualDeFim() {
-  return "<br/><b><H4>&emsp;&emsp;&emsp;.......................................... FIM ...........................................</H4></b>";
+  return `<br/><p class="text-center">${'.'.repeat(160)}</p>`;
 }
 
 function geraVisualDeInformacoes(semente) {
@@ -124,4 +121,8 @@ function padSpaces(atual, maximo) {
   }
 
   return conteudo;
+}
+
+function baixaListaCSV(embaralhada, nomeCurso, nomePolo, cota){
+
 }
