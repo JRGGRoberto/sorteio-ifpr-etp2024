@@ -13,7 +13,7 @@ function geraListaSorteada() {
   let embaralhada = gereListaEmbaralhada(inscritos, semente);
   
   imprimeResultado(nomeCurso, semente, embaralhada, nomePolo, cota);
-  baixaListaCSV(embaralhada, nomeCurso, nomePolo, cota);
+  // baixaListaCSV(embaralhada, nomeCurso, nomePolo, cota);
 }
 
 function gereListaEmbaralhada(inscritos, semente) {
@@ -123,6 +123,36 @@ function padSpaces(atual, maximo) {
   return conteudo;
 }
 
-function baixaListaCSV(embaralhada, nomeCurso, nomePolo, cota){
+function baixaListaCSV(lista, nomeCurso, nomePolo, cota){
+  let csvContent = ''
+
+  lista.forEach(row => {
+  csvContent += `${row}\n`;
+})
+
+const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' })
+const objUrl = URL.createObjectURL(blob);
+// Create a link element
+const link = document.createElement("a");
+
+// Set link's href to point to the Blob URL
+link.href = objUrl;
+link.download = `${nomePolo}_${nomeCurso}_${cota}_${new Date().getTime()}.csv`;
+
+// Append link to the body
+document.body.appendChild(link);
+
+// Dispatch click event on the link
+// This is necessary as link.click() does not work on the latest firefox
+link.dispatchEvent(
+  new MouseEvent('click', { 
+    bubbles: true, 
+    cancelable: true, 
+    view: window 
+  })
+);
+
+// Remove link from body
+document.body.removeChild(link);
 
 }
