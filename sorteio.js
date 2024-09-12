@@ -9,7 +9,7 @@ function geraListaSorteada() {
   } else {
     semente = new Date().getTime();
   }
-  // let vagas = document.sorteio.vagas.value;
+
   let embaralhada = gereListaEmbaralhada(inscritos, semente);
   
   imprimeResultado(nomeCurso, semente, embaralhada, nomePolo, cota);
@@ -80,23 +80,6 @@ function gereVisualDeListaDeSelecionados(lista) {
   return conteudo;
 }
 
-// function gereVisualDeCabecalhoDaEspera(nomeCurso) {
-//   return " <H2>&emsp;&emsp;&emsp;&emsp;&emsp;  Candidatos em Lista de Espera " + "</H2>";
-// }
-
-// function gereVisualDeListaDeEspera(lista, ultimaPosicao) {
-//   var conteudo = "";
-
-//   for (var i = ultimaPosicao; i < lista.length; i++) {
-
-//     conteudo += "<table width=40% ><tr> <td  width=20%  align=right>" + padSpaces(lista[i], lista.length) + "(" + (parseInt(i) + 1) + "º) número </td><td width=20% align=right>&emsp;&emsp;&emsp; " + lista[i] + "</td></tr></table>";
-
-
-//   }
-
-//   return conteudo;
-// }
-
 function gereVisualDeFim() {
   return `<br/><p class="text-center">${'.'.repeat(160)}</p>`;
 }
@@ -124,26 +107,20 @@ function padSpaces(atual, maximo) {
 }
 
 function baixaListaCSV(lista, nomeCurso, nomePolo, cota){
-  let csvContent = ''
+  let csvContent = 'posicao,inscricao\n';
 
-  lista.forEach(row => {
-  csvContent += `${row}\n`;
+  lista.forEach((row, index) => {
+  csvContent += `${index+1},${row}\n`;
 })
 
 const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' })
 const objUrl = URL.createObjectURL(blob);
-// Create a link element
 const link = document.createElement("a");
-
-// Set link's href to point to the Blob URL
 link.href = objUrl;
 link.download = `${nomePolo}_${nomeCurso}_${cota}_${new Date().getTime()}.csv`;
 
-// Append link to the body
 document.body.appendChild(link);
 
-// Dispatch click event on the link
-// This is necessary as link.click() does not work on the latest firefox
 link.dispatchEvent(
   new MouseEvent('click', { 
     bubbles: true, 
@@ -152,7 +129,6 @@ link.dispatchEvent(
   })
 );
 
-// Remove link from body
 document.body.removeChild(link);
 
 }

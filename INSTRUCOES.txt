@@ -1,0 +1,3 @@
+Para fins de auditoria:
+    Para replicar o resultado de um sorteio, utilize os mesmo parâmetros do resultado, especialmente nos campos: vagas e semente, pois são fundamentais para os cálculos do sorteio.
+    Para executar o programa, basta abrir o arquivo "sorteio.html" utilizando um navegador (com javascript habilitado).
