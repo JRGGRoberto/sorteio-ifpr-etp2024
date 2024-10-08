@@ -42,10 +42,10 @@ function imprimeResultado(nomeCurso, semente, embaralhada, nomePolo, cota) {
   let conteudo = `
   <div class="col">
     <div class="row justify-content-center">
-      ${geraCabecalhoDaLista(nomeCurso, nomePolo, cota)}
+      ${geraCabecalhoDaLista()}
       <div class="col-md-6">
       <table class="table table-striped table-sm" style="margin-left: 1rem;">
-        <caption style="caption-side: top; text-align: center;">Classificados do Sorteio na Ação Afirmativa: ${cota} </br> ${nomePolo} - ${nomeCurso}</caption>
+        <caption style="caption-side: top; text-align: center;">Classificação do Sorteio para ${cota}</br>${nomeCurso} - Polo ${nomePolo}</caption>
         <tr><td>Posição</td><td>Número de Inscrição</td></tr>
         ${gereVisualDeListaDeSelecionados(embaralhada)}
       </table>
@@ -61,7 +61,7 @@ function imprimeResultado(nomeCurso, semente, embaralhada, nomePolo, cota) {
   divImpressao.innerHTML = conteudo;
 }
 
-function geraCabecalhoDaLista(nomeCurso, nomePolo, cota) {
+function geraCabecalhoDaLista() {
   return `
     <div class="col-md-1">
       <img class="img-responsive text-center" src="republica_brasao_cor_rgb.jpg" alt="Brasão da República" width="100%" height="100%">
