@@ -13,20 +13,20 @@ function geraListaSorteada() {
   let embaralhada = gereListaEmbaralhada(inscritos, semente);
   
   imprimeResultado(nomeCurso, semente, embaralhada, nomePolo, cota);
-  // baixaListaCSV(embaralhada, nomeCurso, nomePolo, cota);
+  baixaListaCSV(embaralhada, nomeCurso, nomePolo, cota);
 }
 
 function gereListaEmbaralhada(inscritos, semente) {
   Math.seedrandom(semente);
-  var consumida = new Array(inscritos);
-  var resultado = new Array(inscritos);
-  for (var i = 0; i < inscritos; i++) {
+  let consumida = new Array(inscritos);
+  let resultado = new Array(inscritos);
+  for (let i = 0; i < inscritos; i++) {
     consumida[i] = 1 + i;
     resultado[i] = 0;
   }
 
-  for (var i = 0; i < inscritos; i++) {
-    var aleatorio = Math.floor(Math.random() * inscritos);
+  for (let i = 0; i < inscritos; i++) {
+    let aleatorio = Math.floor(Math.random() * inscritos);
     while (consumida[aleatorio] == 0) {
       aleatorio = (1 + aleatorio) % inscritos;
     }
