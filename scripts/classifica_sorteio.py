@@ -5,14 +5,14 @@ import pandas as pd
 from datetime import datetime
 
 def gera_classificados(sorteio_filename='', inscritos_filename='', categoria=''):
-    df_sorteio = pd.read_csv('exemplo_sorteio.csv')
-    df_inscritos = pd.read_csv('exemplo_inscritos.csv')
-    print(f'Inscritos: {df_inscritos["inscricao"].count()}\nSorteio: {df_sorteio["inscricao"].count()}')
-    df_classificacao = pd.merge(left=df_sorteio, right=df_inscritos, how='left', on='inscricao')
+    df_sorteio = pd.read_csv(sorteio_filename)
+    df_inscritos = pd.read_csv(inscritos_filename)
+    print(f'Inscritos: {df_inscritos["NÚMERO PARA SORTEIO"].count()}\nSorteio: {df_sorteio["inscricao"].count()}')
+    df_classificacao = pd.merge(left=df_sorteio, right=df_inscritos, how='left', left_on='inscricao', right_on='NÚMERO PARA SORTEIO')
     df_classificacao.to_csv(f'classificacao_{categoria}.csv')
 
     # checa se algum inscrito ficou fora da classificacao
-    df_inscrito_fora_lista = df_classificacao[~df_classificacao['inscricao'].isin(df_inscritos['inscricao'])]
+    df_inscrito_fora_lista = df_classificacao[~df_classificacao['inscricao'].isin(df_inscritos['NÚMERO PARA SORTEIO'])]
     if not df_inscrito_fora_lista.empty:
         print('Existem inscritos fora da lista')
         df_inscrito_fora_lista.to_csv(f'inscrito_fora_lista_{categoria}.csv')
