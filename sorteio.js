@@ -13,7 +13,7 @@ function geraListaSorteada() {
   let embaralhada = gereListaEmbaralhada(inscritos, semente);
   
   imprimeResultado(nomeCurso, semente, embaralhada, nomePolo, cota);
-  baixaListaCSV(embaralhada, nomeCurso, nomePolo, cota);
+  // baixaListaCSV(embaralhada, nomeCurso, nomePolo, cota);
 }
 
 function gereListaEmbaralhada(inscritos, semente) {
